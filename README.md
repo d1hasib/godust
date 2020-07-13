@@ -24,7 +24,7 @@ cargo install --git https://github.com/d1hasib/godust
 If you haven't do it already, add the following line in your
 `.bashrc` or `.zshrc` file.
 ```
-CARGO_HOME=$HOME/.cargo
+export PATH=$PATH:$HOME/.cargo/bin
 ```
 This will help `shell` to find `godust`
 ## Usage
