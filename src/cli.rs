@@ -86,6 +86,10 @@ impl Project {
 }
 
 fn name_formatter(name: &str) -> String {
+    name.to_lowercase().replace(" ", "-")
+}
+
+fn name_formatter_with_dash(name: &str) -> String {
     name.to_lowercase().replace(" ", "_")
 }
 
@@ -161,7 +165,7 @@ reloadable=true
 X11.64=\"res://target/debug/lib{name}.so\"
 OSX.64=\"res://target/debug/lib{name}.dylib\"
 Windows.64=\"res://target/debug/{name}.dll\"",
-        name = name_formatter(name),
+        name = name_formatter_with_dash(name),
     )
 }
 
