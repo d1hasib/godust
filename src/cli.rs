@@ -86,10 +86,6 @@ impl Project {
 }
 
 fn name_formatter(name: &str) -> String {
-    name.to_lowercase().replace(" ", "-")
-}
-
-fn name_formatter_with_dash(name: &str) -> String {
     name.to_lowercase().replace(" ", "_")
 }
 
@@ -120,8 +116,7 @@ gdnative = \"0.8\"",
 }
 
 fn get_rustlib_text() -> String {
-    format!(
-        "\
+    "\
 use gdnative::*;
 
 #[derive(NativeClass)]
@@ -129,25 +124,25 @@ use gdnative::*;
 struct HelloWorld;
 
 #[methods]
-impl HelloWorld {{
-    fn _init(_owner: Node) -> Self {{
+impl HelloWorld {
+    fn _init(_owner: Node) -> Self {
         HelloWorld
-    }}
+    }
 
     #[export]
-    fn _ready(&self, _owner: Node) {{
+    fn _ready(&self, _owner: Node) {
         godot_print!(\"Hello, World!\")
-    }}
-}}
+    }
+}
 
-fn init(handle: init::InitHandle) {{
+fn init(handle: init::InitHandle) {
     handle.add_class::<HelloWorld>();
-}}
+}
 
 godot_gdnative_init!();
 godot_nativescript_init!(init);
 godot_gdnative_terminate!();"
-    )
+        .to_string()
 }
 
 fn get_gdnlib_text(name: &str) -> String {
@@ -165,7 +160,7 @@ reloadable=true
 X11.64=\"res://target/debug/lib{name}.so\"
 OSX.64=\"res://target/debug/lib{name}.dylib\"
 Windows.64=\"res://target/debug/{name}.dll\"",
-        name = name_formatter_with_dash(name),
+        name = name_formatter(name),
     )
 }
 
